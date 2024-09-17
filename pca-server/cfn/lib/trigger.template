@@ -114,7 +114,7 @@ Resources:
   ConfigureBucketFunction:
     Type: "AWS::Lambda::Function"
     Properties:
-      Code:  ../../src/trigger
+      Code:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/trigger/
       Handler: index.handler
       Runtime: nodejs18.x
       Role: !GetAtt ConfigureBucketRole.Arn

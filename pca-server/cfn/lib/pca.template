@@ -136,7 +136,7 @@ Resources:
   SFStartTranscribeJob:
     Type: "AWS::Serverless::Function"
     Properties:
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-sf-start-transcribe-job.lambda_handler
       EphemeralStorage:
         Size: 4096
@@ -153,7 +153,7 @@ Resources:
   SFExtractJobHeader:
     Type: "AWS::Serverless::Function"
     Properties:
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-sf-extract-job-header.lambda_handler
       MemorySize: 1024
       Timeout: 900
@@ -170,7 +170,7 @@ Resources:
   SFExtractTranscriptHeader:
     Type: "AWS::Serverless::Function"
     Properties:
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-sf-extract-transcript-header.lambda_handler
       MemorySize: 1024
       Timeout: 900
@@ -187,7 +187,7 @@ Resources:
   SFProcessTurn:
     Type: "AWS::Serverless::Function"
     Properties:
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-sf-process-turn-by-turn.lambda_handler
       MemorySize: 1024
       Timeout: 900
@@ -207,7 +207,7 @@ Resources:
   SFFinalProcessing:
     Type: "AWS::Serverless::Function"
     Properties:
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-sf-post-processing.lambda_handler
       Layers:
         - !Ref Boto3Layer
@@ -221,7 +221,7 @@ Resources:
   SFCTRGenesys:
     Type: "AWS::Serverless::Function"
     Properties:
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-sf-ctr-genesys.lambda_handler
       Layers:
         - !Ref Boto3Layer
@@ -235,7 +235,7 @@ Resources:
   SFPostCTRProcessing:
     Type: "AWS::Serverless::Function"
     Properties:
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-sf-post-ctr-processing.lambda_handler
       Layers:
         - !Ref Boto3Layer
@@ -250,7 +250,7 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Runtime: python3.11
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-fetch-transcript.lambda_handler
       Timeout: 900
       Policies:
@@ -261,7 +261,7 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Runtime: python3.11
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-sf-summarize.lambda_handler
       Timeout: 900
       Layers:
@@ -335,7 +335,7 @@ Resources:
   SFAwaitNotification:
     Type: "AWS::Serverless::Function"
     Properties:
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-sf-wait-for-transcribe-notification.lambda_handler
       Environment:
         Variables:
@@ -346,7 +346,7 @@ Resources:
   SFTranscribeFailed:
     Type: "AWS::Serverless::Function"
     Properties:
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-sf-transcribe-failed.lambda_handler
       Environment:
         Variables:
