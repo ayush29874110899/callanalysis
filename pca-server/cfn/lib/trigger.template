@@ -46,7 +46,7 @@ Resources:
       Environment:
         Variables:
           SUMMARIZE: !Ref Summarize
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-aws-file-drop-trigger.lambda_handler
       Layers:
         - !Ref Boto3Layer
@@ -147,7 +147,7 @@ Resources:
   TranscribeEventbridge:
     Type: "AWS::Serverless::Function"
     Properties:
-      CodeUri:  ../../src/pca
+      CodeUri:  https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/pca/
       Handler: pca-transcribe-eventbridge.lambda_handler
       Layers:
         - !Ref Boto3Layer

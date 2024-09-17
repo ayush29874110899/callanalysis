@@ -94,7 +94,7 @@ Resources:
   FFMPEG:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: lib/ffmpeg.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/lib/ffmpeg.template
       Parameters:
         ffmpegDownloadUrl: !Ref ffmpegDownloadUrl
 
@@ -102,17 +102,17 @@ Resources:
     Condition: ShouldCreateBoto3Layer
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: lib/boto3.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/lib/boto3.template
 
   DDB:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: lib/ddb.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/lib/ddb.template
 
   PCA:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: lib/pca.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/lib/pca.template
       Parameters:
         TableName: !GetAtt DDB.Outputs.TableName
         FFMPEGZipName: !GetAtt FFMPEG.Outputs.FFMPEGZipName
@@ -138,7 +138,7 @@ Resources:
   Trigger:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: lib/trigger.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/lib/trigger.template
       Parameters:
         TableName: !GetAtt DDB.Outputs.TableName
         Boto3Layer: !If 
@@ -151,12 +151,12 @@ Resources:
   BulkImport:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: lib/bulk.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/lib/bulk.template
       
   GlueDatabase:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: lib/glue-database.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/lib/glue-database.template
 
   ##########################################################################
   # Transcript Summary
@@ -166,7 +166,7 @@ Resources:
     Condition: ShouldDeploySageMakerSummarizer
     Properties:
       # yamllint disable rule:line-length
-      TemplateURL: lib/sagemaker-summary.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/lib/sagemaker-summary.template
       # yamllint enable rule:line-length
       Parameters:
         InitialInstanceCount: !Ref SummarizationSageMakerInitialInstanceCount

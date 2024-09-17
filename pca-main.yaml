@@ -968,7 +968,7 @@ Resources:
   LLMPromptConfigure:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: pca-server/cfn/lib/llm.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/lib/llm.template
 
   ########################################################
   # SSM Stack
@@ -977,7 +977,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     DependsOn: LLMPromptConfigure
     Properties:
-      TemplateURL: pca-ssm/cfn/ssm.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-ssm/ssm.template
       Parameters:
         BulkUploadBucketName:
           !If
@@ -1049,13 +1049,13 @@ Resources:
     DependsOn: SSM
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: pca-server/cfn/lib/python-utilities.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/lib/python-utilities.template
 
   BedrockBoto3Layer:
     Type: AWS::CloudFormation::Stack
     # Condition: ShouldDeployBedrockBoto3Layer
     Properties:
-      TemplateURL: pca-boto3-bedrock/template.yaml
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-boto3-bedrock/template.yaml
 
   LLMThirdPartyApiKeySecret:
     Condition: ShouldDeployLLMThirdPartyApiKey
@@ -1074,7 +1074,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     DependsOn: SSM
     Properties:
-      TemplateURL: pca-server/cfn/pca-server.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/cfn/pca-server.template
       Parameters:
         ffmpegDownloadUrl: !Ref ffmpegDownloadUrl
         CallSummarization: !Ref CallSummarization
@@ -1092,64 +1092,12 @@ Resources:
           - ''
         LLMTableName: !GetAtt LLMPromptConfigure.Outputs.LLMTableName
 
-  PCAUI:
-    Type: AWS::CloudFormation::Stack
-    Condition: ShouldEnableGui
-    Properties:
-      TemplateURL: pca-ui/cfn/pca-ui.template
-      Parameters:
-        AdminUsername: !Ref AdminUsername
-        AdminEmail: !Ref AdminEmail
-        MainStackName: !Ref AWS::StackName
-        AudioBucket:
-          !If
-          - ShouldCreateInputBucket
-          - !Ref InputBucket
-          - !Ref InputBucketName 
-        AudioBucketPrefix: !Ref InputBucketRawAudio
-        DataBucket:
-          !If
-          - ShouldCreateOutputBucket
-          - !Ref OutputBucket
-          - !Ref OutputBucketName
-        DataPrefix: !Ref OutputBucketParsedResults
-        Environment: !Ref Environment
-        GenAIQueryType: !Ref GenAIQuery
-        GenAIQueryBedrockModelId: !Ref GenAIQueryBedrockModelId
-        FetchTranscriptArn: !GetAtt PCAServer.Outputs.FetchTranscriptArn
-        SummarizerArn: !GetAtt PCAServer.Outputs.SummarizerArn
-        StepFunctionName: !Ref StepFunctionName
-        LLMThirdPartyApiKey: !If 
-          - ShouldDeployLLMThirdPartyApiKey
-          - !Ref LLMThirdPartyApiKeySecret
-          - ''
-        PyUtilsLayerArn: !GetAtt PythonUtilsLayer.Outputs.PyUtilsLayer
-        Boto3LayerArn: !If
-          - ShouldDeployBedrockBoto3Layer
-          - !GetAtt BedrockBoto3Layer.Outputs.Boto3Layer
-          - ''
-        LLMTableName: !GetAtt LLMPromptConfigure.Outputs.LLMTableName
-
-  MediaSearchKendraFinder:
-    Type: AWS::CloudFormation::Stack
-    Condition: ShouldEnableKendraSearch
-    Properties:
-      TemplateURL: build/pca-mediasearch-finder.yaml
-      Parameters:
-        AdminEmail: !Ref AdminEmail
-        KendraIndexId: !Ref KendraIndex
-        MediaBucketNames:
-          !If
-          - ShouldCreateInputBucket
-          - !Ref InputBucket
-          - !Ref InputBucketName
-
   PcaDashboards:
     Type: AWS::CloudFormation::Stack
     Condition: ShouldDeployPcaDashboards
     DependsOn: PCAServer
     Properties:
-      TemplateURL: build/pca-dashboards.yaml
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-dashboards/pca-dashboards.yaml
       Parameters:
         PcaGlueCatalogDatabaseName: !Ref DatabaseName
         PcaOutputBucket: 
@@ -1167,7 +1115,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Condition: ShouldLoadSampleFiles
     Properties:
-      TemplateURL: pca-samples/copy-samples.template
+      TemplateURL: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-samples/copy-samples.template
       Parameters:
         DependsOnPCAServer: !Ref PCAServer
         DependsOnPCAUI: !If [ShouldEnableGui, !Ref PCAUI, !Ref AWS::NoValue]
