@@ -1083,11 +1083,13 @@ Resources:
         SummarizationLLMThirdPartyApiKey: !If 
           - ShouldDeployLLMThirdPartyApiKey
           - !Ref LLMThirdPartyApiKeySecret
+          - 'None'
         SummarizationLambdaFunctionArn: !Ref SummarizationLambdaFunctionArn
         PyUtilsLayerArn: !GetAtt PythonUtilsLayer.Outputs.PyUtilsLayer
         Boto3LayerArn: !If
           - ShouldDeployBedrockBoto3Layer
           - !GetAtt BedrockBoto3Layer.Outputs.Boto3Layer
+          - 'None'
         LLMTableName: !GetAtt LLMPromptConfigure.Outputs.LLMTableName
 
   PCAUI:
@@ -1120,10 +1122,12 @@ Resources:
         LLMThirdPartyApiKey: !If 
           - ShouldDeployLLMThirdPartyApiKey
           - !Ref LLMThirdPartyApiKeySecret
+          - 'None'
         PyUtilsLayerArn: !GetAtt PythonUtilsLayer.Outputs.PyUtilsLayer
         Boto3LayerArn: !If
           - ShouldDeployBedrockBoto3Layer
           - !GetAtt BedrockBoto3Layer.Outputs.Boto3Layer
+          - 'None'
         LLMTableName: !GetAtt LLMPromptConfigure.Outputs.LLMTableName
 
   MediaSearchKendraFinder:
