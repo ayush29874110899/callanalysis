@@ -83,7 +83,7 @@ Resources:
     Properties:
       Code: 
         S3Bucket: aws-templatepc
-        S3Key: pca-server/src/llm/llm_code.zip
+        S3Key: pca-server/src/llm/
       Handler: llm_prompt_upload.lambda_handler
       Role: !GetAtt ConfigureDynamoDBRole.Arn
       Runtime: python3.11
