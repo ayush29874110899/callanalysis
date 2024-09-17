@@ -81,7 +81,9 @@ Resources:
   ConfigureDynamoDBFunction:
     Type: "AWS::Lambda::Function"
     Properties:
-      Code: https://aws-templatepc.s3.ap-southeast-2.amazonaws.com/pca-server/src/llm/
+      Code: 
+        S3Bucket: aws-templatepc
+        S3Key: pca-server/src/llm/llm_code.zip
       Handler: llm_prompt_upload.lambda_handler
       Role: !GetAtt ConfigureDynamoDBRole.Arn
       Runtime: python3.11
