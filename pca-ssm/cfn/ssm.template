@@ -13,12 +13,12 @@ Parameters:
 
   BulkUploadMaxDripRate:
     Type: String
-    Default: "25"
+    Default: "5"
     Description: Maximum number of files that the bulk uploader will move to the PCA source bucket in one pass
 
   BulkUploadMaxTranscribeJobs:
     Type: String
-    Default: "50"
+    Default: "10"
     Description: Number of concurrent Transcribe jobs (executing or queuing) where bulk upload will pause
 
   CallSummarization:
@@ -69,7 +69,7 @@ Parameters:
 
   EntityThreshold:
     Type: String
-    Default: "0.5"
+    Default: "0.6"
     Description: Confidence threshold where we accept the custom entity detection result
 
   EntityTypes:
